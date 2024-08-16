@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        {% block title %}Django{% endblock %}
+    </title>
+    {% load static %}
+    <link rel="stylesheet" href="https://matcha.mizu.sh/matcha.css" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+  </head>
+  <body>
+    <h1>Django</h1>
+    <h2>Static = {% static 'js/scripts.js' %}</h2>
+    <nav>
+      {% include 'partials/nav.html' %}
+    </nav>
+    {% block content %}
+    {% endblock %}
+  </body>
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <script src="{% static 'js/s2.js' %}"></script>
+</html>
