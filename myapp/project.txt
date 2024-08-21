@@ -1,0 +1,6 @@
+id = integer
+title  = varchar(200)
+description = text
+completed = boolean
+created_at = date
+due_date = date
