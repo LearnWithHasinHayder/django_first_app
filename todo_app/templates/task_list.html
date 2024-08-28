@@ -6,7 +6,7 @@
 <ul>
     {% for task in tasks %}
     <li>
-        <a href="{% url 'task_details' task.pk %}">{{ task.title }}</a> - {{ task.description }} - {{ task.completed }}
+        {{ task.id }}. <a href="{% url 'task_details' task.pk %}">{{ task.title }}</a> - {{ task.description }} - {{ task.completed }} | <a href="{% url 'delete_task' task.id %}">Delete</a>
     </li>
     {% endfor %}
 </ul>
@@ -16,5 +16,7 @@
 <a href="/tasks/?completed=0">Pending Tasks</a>
 <br>
 <a href="/tasks/">All Tasks</a>
+<br>
+<a href="/tasks/form">Add Task</a>
 
 {% endblock %}
