@@ -1,0 +1,156 @@
+[
+    {
+        "model":"todo_app.author",
+        "pk":1,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "bio": "American author"
+        }
+    },
+    {
+        "model": "todo_app.author",
+        "pk": 2,
+        "fields": {
+            "first_name": "Jane",
+            "last_name": "Smith",
+            "bio": "British author"
+        }
+    },
+    {
+        "model": "todo_app.author",
+        "pk": 3,
+        "fields": {
+            "first_name": "Bob",
+            "last_name": "Johnson",
+            "bio": "Canadian author"
+        }
+    },
+    {
+        "model": "todo_app.author",
+        "pk": 4,
+        "fields": {
+            "first_name": "Alice",
+            "last_name": "Williams",
+            "bio": "Australian author"
+        }
+    },
+    {
+        "model": "todo_app.author",
+        "pk": 5,
+        "fields": {
+            "first_name": "Mike",
+            "last_name": "Brown",
+            "bio": "American author"
+        }
+    },
+    {
+        "model": "todo_app.author",
+        "pk": 6,
+        "fields": {
+            "first_name": "Emily",
+            "last_name": "Davis",
+            "bio": "British author"
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 1,
+        "fields": {
+            "title": "The Great Book",
+            "description": "This is a great book.",
+            "publication_date": "2010-01-01",
+            "author": 1
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 2,
+        "fields": {
+            "title": "The Second Book",
+            "description": "This is the second book.",
+            "publication_date": "2011-01-01",
+            "author": 1
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 3,
+        "fields": {
+            "title": "The Third Book",
+            "description": "This is the third book.",
+            "publication_date": "2012-01-01",
+            "author": 2
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 4,
+        "fields": {
+            "title": "The Fourth Book",
+            "description": "This is the fourth book.",
+            "publication_date": "2013-01-01",
+            "author": 3
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 5,
+        "fields": {
+            "title": "The Fifth Book",
+            "description": "This is the fifth book.",
+            "publication_date": "2014-01-01",
+            "author": 4
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 6,
+        "fields": {
+            "title": "The Sixth Book",
+            "description": "This is the sixth book.",
+            "publication_date": "2015-01-01",
+            "author": 5
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 7,
+        "fields": {
+            "title": "The Seventh Book",
+            "description": "This is the seventh book.",
+            "publication_date": "2016-01-01",
+            "author": 6
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 8,
+        "fields": {
+            "title": "The Eighth Book",
+            "description": "This is the eighth book.",
+            "publication_date": "2017-01-01",
+            "author": 1
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 9,
+        "fields": {
+            "title": "The Ninth Book",
+            "description": "This is the ninth book.",
+            "publication_date": "2018-01-01",
+            "author": 3
+        }
+    },
+    {
+        "model": "todo_app.book",
+        "pk": 10,
+        "fields": {
+            "title": "The Tenth Book",
+            "description": "This is the tenth book.",
+            "publication_date": "2019-01-01",
+            "author": 2
+        }
+    }
+]

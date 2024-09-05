@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Task
+from .models import Task, Book, Author
 from django.http import HttpResponse, JsonResponse
 from .forms import TaskForm
+from django.forms.models import model_to_dict
 
 from django.contrib.auth.models import User
 
@@ -86,3 +87,42 @@ def task_by_user_id(request, user_id):
     # tasks = user.task_set.all().values()
     tasks = user.tasks.all().values()
     return JsonResponse({"tasks": list(tasks)})
+
+#--books and authors----
+
+def all_boooks(request):
+    books = Book.objects.all()
+    # return JsonResponse({"books": list(books)})
+    result = []
+    for book in books:
+        result.append({
+            "title": book.title,
+            "description": book.description,
+            "publication_date": book.publication_date,
+            "author": f'{book.author.first_name} {book.author.last_name}'
+        })
+    
+    return JsonResponse({"books": result})
+    
+def book(request, book_id):
+    book = Book.objects.get(pk=book_id)
+    # book_to_json = model_to_dict(book)
+    book_details = {
+        "title":book.title,
+        "description":book.description,
+        "publication_date":book.publication_date,
+        "author":f'{book.author.first_name} {book.author.last_name}' 
+    }
+    return JsonResponse({"book": book_details})
+    
+
+def author(request, author_id):
+    author = Author.objects.get(pk=author_id)
+    
+    author_details = {
+        "first_name":author.first_name,
+        "last_name":author.last_name,
+        "bio":author.bio,
+        "books":[book.title for book in author.books.all()]
+    }
+    return JsonResponse({"author": author_details})
