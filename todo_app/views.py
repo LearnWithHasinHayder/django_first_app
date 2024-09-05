@@ -58,18 +58,19 @@ def update_task(request):
 
 def add_task_form(request):
     if request.method == "POST":
-        form  = TaskForm(request.POST)
-        if (form.is_valid()):
+        form = TaskForm(request.POST)
+        if form.is_valid():
             form.save()
             return redirect("task_list")
     else:
         form = TaskForm()
         return render(request, "add_task.html", {"formx": form})
-    
+
+
 def task_by_user_id(request, user_id):
     # tasks = Task.objects.filter(user_id=user_id).values()
     # return JsonResponse({"tasks": list(tasks)})
-    #----2----
+    # ----2----
     # tasks = Task.objects.filter(user_id=user_id)
     # result = []
     # for task in tasks:
@@ -82,47 +83,99 @@ def task_by_user_id(request, user_id):
     #         "user_id":task.user.id,
     #         "user":task.user.first_name
     #     })
-    #-------------3--------
+    # -------------3--------
     user = User.objects.get(pk=user_id)
     # tasks = user.task_set.all().values()
     tasks = user.tasks.all().values()
     return JsonResponse({"tasks": list(tasks)})
 
-#--books and authors----
+
+# --books and authors----
+
+
+# def all_boooks(request):
+#     books = Book.objects.all()
+#     # return JsonResponse({"books": list(books)})
+#     result = []
+#     for book in books:
+#         result.append(
+#             {
+#                 "title": book.title,
+#                 "description": book.description,
+#                 "publication_date": book.publication_date,
+#                 "author": f"{book.author.first_name} {book.author.last_name}",
+#             }
+#         )
+
+#     return JsonResponse({"books": result})
+
+
+# def book(request, book_id):
+#     book = Book.objects.get(pk=book_id)
+#     # book_to_json = model_to_dict(book)
+#     book_details = {
+#         "title":book.title,
+#         "description":book.description,
+#         "publication_date":book.publication_date,
+#         "author":f'{book.author.first_name} {book.author.last_name}'
+#     }
+#     return JsonResponse({"book": book_details})
+
+
+def author(request, author_id):
+    author = Author.objects.get(pk=author_id)
+
+    author_details = {
+        "first_name": author.first_name,
+        "last_name": author.last_name,
+        "bio": author.bio,
+        "books": [book.title for book in author.books.all()],
+    }
+    return JsonResponse({"author": author_details})
+
+
+# ---many to many---
+
+
+def book(request, book_id):
+    book = Book.objects.get(pk=book_id)
+    book_details = {
+        "title": book.title,
+        "description": book.description,
+        "publication_date": book.publication_date,
+        "author": [
+            f"{author.first_name} {author.last_name}"
+            for author in book.author.all()
+        ],
+    }
+    return JsonResponse({"book": book_details})
+
 
 def all_boooks(request):
     books = Book.objects.all()
     # return JsonResponse({"books": list(books)})
     result = []
     for book in books:
-        result.append({
-            "title": book.title,
-            "description": book.description,
-            "publication_date": book.publication_date,
-            "author": f'{book.author.first_name} {book.author.last_name}'
-        })
-    
-    return JsonResponse({"books": result})
-    
-def book(request, book_id):
-    book = Book.objects.get(pk=book_id)
-    # book_to_json = model_to_dict(book)
-    book_details = {
-        "title":book.title,
-        "description":book.description,
-        "publication_date":book.publication_date,
-        "author":f'{book.author.first_name} {book.author.last_name}' 
-    }
-    return JsonResponse({"book": book_details})
-    
+        result.append(
+            {
+                "title": book.title,
+                "description": book.description,
+                "publication_date": book.publication_date,
+                # "author_ids":[
+                #     author.id for author in book.author.all()
+                # ],
+                # "author": [
+                #     f"{author.first_name} {author.last_name}"
+                #     for author in book.author.all()
+                # ]
+                "authors":[
+                    {
+                        "id":author.id,
+                        "first_name":author.first_name,
+                        "last_name":author.last_name
+                    } for author in book.author.all()
+                ]
+            }
+        )
 
-def author(request, author_id):
-    author = Author.objects.get(pk=author_id)
-    
-    author_details = {
-        "first_name":author.first_name,
-        "last_name":author.last_name,
-        "bio":author.bio,
-        "books":[book.title for book in author.books.all()]
-    }
-    return JsonResponse({"author": author_details})
+    return JsonResponse({"books": result})
