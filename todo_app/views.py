@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Task
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .forms import TaskForm
+
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -62,3 +64,25 @@ def add_task_form(request):
     else:
         form = TaskForm()
         return render(request, "add_task.html", {"formx": form})
+    
+def task_by_user_id(request, user_id):
+    # tasks = Task.objects.filter(user_id=user_id).values()
+    # return JsonResponse({"tasks": list(tasks)})
+    #----2----
+    # tasks = Task.objects.filter(user_id=user_id)
+    # result = []
+    # for task in tasks:
+    #     result.append({
+    #         "title": task.title,
+    #         "description": task.description,
+    #         "completed": task.completed,
+    #         "created_at": task.created_at,
+    #         "due_date": task.due_date,
+    #         "user_id":task.user.id,
+    #         "user":task.user.first_name
+    #     })
+    #-------------3--------
+    user = User.objects.get(pk=user_id)
+    # tasks = user.task_set.all().values()
+    tasks = user.tasks.all().values()
+    return JsonResponse({"tasks": list(tasks)})
