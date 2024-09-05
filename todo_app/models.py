@@ -12,7 +12,9 @@ class Task(models.Model):
     
     def __str__(self):
         return self.title
-    
+
+# one to many relationship 
+
 # class Author(models.Model):
 #     first_name = models.CharField(max_length=100)
 #     last_name = models.CharField(max_length=100)
@@ -30,6 +32,7 @@ class Task(models.Model):
 #     def __str__(self):
 #         return self.title
 
+# many to many relationship
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

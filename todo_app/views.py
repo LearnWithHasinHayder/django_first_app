@@ -90,7 +90,7 @@ def task_by_user_id(request, user_id):
     return JsonResponse({"tasks": list(tasks)})
 
 
-# --books and authors----
+# --books and authors one to many relationship ----
 
 
 # def all_boooks(request):
@@ -122,6 +122,20 @@ def task_by_user_id(request, user_id):
 #     return JsonResponse({"book": book_details})
 
 
+# def author(request, author_id):
+#     author = Author.objects.get(pk=author_id)
+
+#     author_details = {
+#         "first_name": author.first_name,
+#         "last_name": author.last_name,
+#         "bio": author.bio,
+#         "books": [book.title for book in author.books.all()],
+#     }
+#     return JsonResponse({"author": author_details})
+
+
+# ---many to many---
+
 def author(request, author_id):
     author = Author.objects.get(pk=author_id)
 
@@ -132,10 +146,6 @@ def author(request, author_id):
         "books": [book.title for book in author.books.all()],
     }
     return JsonResponse({"author": author_details})
-
-
-# ---many to many---
-
 
 def book(request, book_id):
     book = Book.objects.get(pk=book_id)
